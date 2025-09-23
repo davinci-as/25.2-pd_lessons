@@ -1,10 +1,20 @@
 import "./App.css";
-import Button from "./components/Button";
+import Card from "./components/Card";
 
 function App() {
+  const age = 26;
   return (
     <>
-      <Button text={""} />
+      <Card
+        title="prueba de titulo 1"
+        buttonText={"Call To Action 1"}
+        className={age > 18 ? "green" : "red"}
+      />
+      <Card
+        title="prueba de titulo 2"
+        buttonText={"Call To Action 2"}
+        className={age <= 18 ? "green" : "red"}
+      />
     </>
   );
 }
