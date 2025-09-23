@@ -3,18 +3,29 @@ import Card from "./components/Card";
 
 function App() {
   const age = 26;
+
+  const cards = [
+    {
+      title: "prueba de titulo 1",
+      buttonText: "Call To Action 1",
+      className: age > 18 ? "green" : "red",
+    },
+    {
+      title: "prueba de titulo 2",
+      buttonText: "Call To Action 2",
+      className: age <= 18 ? "green" : "red",
+    },
+  ];
+
   return (
     <>
-      <Card
-        title="prueba de titulo 1"
-        buttonText={"Call To Action 1"}
-        className={age > 18 ? "green" : "red"}
-      />
-      <Card
-        title="prueba de titulo 2"
-        buttonText={"Call To Action 2"}
-        className={age <= 18 ? "green" : "red"}
-      />
+      {cards.map((card) => (
+        <Card
+          title={card.title}
+          buttonText={card.buttonText}
+          className={card.className}
+        />
+      ))}
     </>
   );
 }
