@@ -1,7 +1,9 @@
 const Button = (props) => {
   return (
     <>
-      <button>{props?.text || "No estás pasando un texto"}</button>
+      <button onClick={props.onClick}>
+        {props?.text || "No estás pasando un texto"}
+      </button>
     </>
   );
 };
