@@ -4,6 +4,12 @@ import Card from "./components/Card";
 function App() {
   const age = 26;
 
+  const criteria = (card) => {
+    if (card.tag === "content-02") {
+      return false;
+    }
+    return true;
+  };
   const cards = [
     {
       tag: "content-01",
@@ -25,18 +31,11 @@ function App() {
     },
   ];
 
-  const tempCards = [];
-
-  for (let i = 0; i < cards.length; i++) {
-    if (cards[i].tag === "content-01") {
-      tempCards.push(cards[i]);
-    }
-  }
-
   return (
     <>
-      {tempCards.map((card) => (
+      {cards.filter(criteria).map((card, i) => (
         <Card
+          key={i}
           title={card.title}
           buttonText={card.buttonText}
           className={card.className}
