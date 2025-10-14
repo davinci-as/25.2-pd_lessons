@@ -1,11 +1,11 @@
 import Button from "../Button";
 //import styles from "./index.module.css";
 
-const Card = (props) => {
+const Card = ({ className, title, buttonText }) => {
   return (
-    <div className={props?.className}>
-      <h3>{props.title}</h3>
-      <Button text={props.buttonText} />
+    <div className={className}>
+      <h3>{title}</h3>
+      <Button text={buttonText} />
     </div>
   );
 };
