@@ -1,52 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Card from "./components/Card";
 import Button from "./components/Button";
-import { useEffect } from "react";
-
-const age = 26;
-const originalCards = [
-  {
-    tag: "content-01",
-    title: "prueba de titulo 1",
-    buttonText: "Call To Action 1",
-    className: age > 18 ? "green" : "red",
-  },
-  {
-    tag: "content-02",
-    title: "prueba de titulo 2",
-    buttonText: "Call To Action 2",
-    className: age <= 18 ? "green" : "red",
-  },
-  {
-    tag: "content-01",
-    title: "prueba de titulo 2",
-    buttonText: "Call To Action 2",
-    className: age <= 18 ? "green" : "red",
-  },
-];
-
-const criteria = (card) => {
-  if (card.tag === "content-02") {
-    return false;
-  }
-  return true;
-};
+import { getData } from "./lib/data";
+import { criteria } from "./lib/filters";
 
 function App() {
   const [cards, setCards] = useState([]);
 
+  const updateData = async () => {
+    const data = await getData();
+    setCards(data);
+  };
+
   useEffect(() => {
-    setTimeout(() => {
-      setCards(originalCards);
-    }, 4000);
+    updateData();
   }, []);
 
   return (
     <>
       <Button
         onClick={() => {
-          setCards(originalCards);
+          updateData();
         }}
       />
 
