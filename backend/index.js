@@ -15,6 +15,23 @@ app.use(express.static(
   path.join(__dirname, ROOT_FOLDER)
 ));
 
+app.use(express.json());
+
+const objectoRetornado = {
+  info: "JSON testing",
+  version: "v1.0.0",
+  name: "Nombre"
+}
+app.get('/api', (req, res) => {
+  const { version, ...resto } = objectoRetornado;
+  res.json(resto);
+});
+
+app.get('/api/version', (req, res) => {
+  res.json(objectoRetornado.version);
+});
+
+
 app.get('/admin', (req, res) => {
   res.send(`
     <html>
@@ -25,6 +42,8 @@ app.get('/admin', (req, res) => {
     `)
 });
 
+/*
+//TODO: clean code
 app.get('/', (req, res) => {
   res.send(`
     <html>
@@ -38,7 +57,7 @@ app.get('/', (req, res) => {
     </body>
     </html>
   `)
-})
+  })*/
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
