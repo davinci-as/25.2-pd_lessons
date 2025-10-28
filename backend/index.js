@@ -1,4 +1,5 @@
 const e = require('express');
+const cors = require('cors');
 const express = require('express')
 const path = require('path');
 const app = express()
@@ -10,6 +11,8 @@ const banner = `
     <h1>Ejemplo de banner inyectado</h1>
   </div>
   `
+
+app.use(cors())
 
 app.use(express.static(
   path.join(__dirname, ROOT_FOLDER)
