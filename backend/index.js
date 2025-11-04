@@ -1,9 +1,18 @@
 const admin = require("firebase-admin");
+const { getFirestore } = require("firebase-admin/firestore");
 require("dotenv").config();
-//var serviceAccount = require("path/to/serviceAccountKey.json");
 
-const service_account = process.env["SERVICE_ACCOUNT_PATH"];
-console.log("env", service_account);
+const SERVICE_ACCOUNT_PATH = process.env["SERVICE_ACCOUNT_PATH"];
+const FIRESTORE_DB = process.env["FIRESTORE_DB"];
+const serviceAccount = require("./" + SERVICE_ACCOUNT_PATH);
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: FIRESTORE_DB,
+});
+
+const db = getFirestore();
+
 const e = require("express");
 const cors = require("cors");
 const express = require("express");
