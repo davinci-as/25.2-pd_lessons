@@ -1,36 +1,40 @@
-const e = require('express');
-const cors = require('cors');
-const express = require('express')
-const path = require('path');
-const app = express()
-const port = 3000
-const ROOT_FOLDER = 'dist';
+const admin = require("firebase-admin");
+require("dotenv").config();
+//var serviceAccount = require("path/to/serviceAccountKey.json");
+
+const service_account = process.env["SERVICE_ACCOUNT_PATH"];
+console.log("env", service_account);
+const e = require("express");
+const cors = require("cors");
+const express = require("express");
+const path = require("path");
+const app = express();
+const port = 3000;
+const ROOT_FOLDER = "dist";
 
 const banner = `
   <div class="banner">
     <h1>Ejemplo de banner inyectado</h1>
   </div>
-  `
+  `;
 
-app.use(cors())
+app.use(cors());
 
-app.use(express.static(
-  path.join(__dirname, ROOT_FOLDER)
-));
+app.use(express.static(path.join(__dirname, ROOT_FOLDER)));
 
 app.use(express.json());
 
 const objectoRetornado = {
   info: "JSON testing",
   version: "v1.0.0",
-  name: "Nombre"
-}
-app.get('/api', (req, res) => {
+  name: "Nombre",
+};
+app.get("/api", (req, res) => {
   const { version, ...resto } = objectoRetornado;
   res.json(resto);
 });
 
-app.get('/api/cards/', (req, res) => {
+app.get("/api/cards/", (req, res) => {
   const age = 26;
 
   const originalCards = [
@@ -51,26 +55,25 @@ app.get('/api/cards/', (req, res) => {
       title: "prueba de titulo 2",
       buttonText: "Call To Action 2",
       className: age <= 18 ? "green" : "red",
-    }
-  ]
+    },
+  ];
   res.json({
-    data: originalCards
-  })
+    data: originalCards,
+  });
 });
 
-app.get('/api/version', (req, res) => {
+app.get("/api/version", (req, res) => {
   res.json(objectoRetornado.version);
 });
 
-
-app.get('/admin', (req, res) => {
+app.get("/admin", (req, res) => {
   res.send(`
     <html>
     <body>
     ${banner}
     </body>
     </html>
-    `)
+    `);
 });
 
 /*
@@ -91,5 +94,5 @@ app.get('/', (req, res) => {
   })*/
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+  console.log(`Example app listening on port ${port}`);
+});
