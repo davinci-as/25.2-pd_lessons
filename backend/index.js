@@ -43,29 +43,19 @@ app.get("/api", (req, res) => {
   res.json(resto);
 });
 
-app.get("/api/cards/", (req, res) => {
+app.get("/api/cards/", async (req, res) => {
   const age = 26;
 
-  const originalCards = [
-    {
-      tag: "content-01",
-      title: "prueba de titulo 1",
-      buttonText: "Call To Action 1",
-      className: age > 18 ? "green" : "red",
-    },
-    {
-      tag: "content-02",
-      title: "prueba de titulo 2",
-      buttonText: "Call To Action 2",
-      className: age <= 18 ? "green" : "red",
-    },
-    {
-      tag: "content-01",
-      title: "prueba de titulo 2",
-      buttonText: "Call To Action 2",
-      className: age <= 18 ? "green" : "red",
-    },
-  ];
+  const cards = await db.collection("cards").get();
+  const originalCards = cards.docs.map((card) => {
+    const id = card.id;
+    const data = card.data();
+    return {
+      id,
+      ...data,
+    };
+  });
+
   res.json({
     data: originalCards,
   });
