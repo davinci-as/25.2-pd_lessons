@@ -43,6 +43,15 @@ app.get("/api", (req, res) => {
   res.json(resto);
 });
 
+app.post("/api/cards/add", async (req, res) => {
+  const body = req.body;
+  console.log("access", body);
+  await db.collection("cards").add({
+    ...body,
+  });
+  res.json({ message: "cargado correctamente" });
+});
+
 app.get("/api/cards/", async (req, res) => {
   const age = 26;
 
