@@ -1,19 +1,5 @@
-const admin = require("firebase-admin");
-const { getFirestore } = require("firebase-admin/firestore");
 require("dotenv").config();
 
-const SERVICE_ACCOUNT_PATH = process.env["SERVICE_ACCOUNT_PATH"];
-const FIRESTORE_DB = process.env["FIRESTORE_DB"];
-const serviceAccount = require("./" + SERVICE_ACCOUNT_PATH);
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: FIRESTORE_DB,
-});
-
-const db = getFirestore();
-
-const e = require("express");
 const cors = require("cors");
 const express = require("express");
 const path = require("path");
@@ -43,32 +29,7 @@ app.get("/api", (req, res) => {
   res.json(resto);
 });
 
-app.post("/api/cards/add", async (req, res) => {
-  const body = req.body;
-  console.log("access", body);
-  await db.collection("cards").add({
-    ...body,
-  });
-  res.json({ message: "cargado correctamente" });
-});
-
-app.get("/api/cards/", async (req, res) => {
-  const age = 26;
-
-  const cards = await db.collection("cards").get();
-  const originalCards = cards.docs.map((card) => {
-    const id = card.id;
-    const data = card.data();
-    return {
-      id,
-      ...data,
-    };
-  });
-
-  res.json({
-    data: originalCards,
-  });
-});
+app.use("/api/cards", require("./routes/cards").default.route);
 
 app.get("/api/version", (req, res) => {
   res.json(objectoRetornado.version);
