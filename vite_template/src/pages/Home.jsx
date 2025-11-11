@@ -24,6 +24,10 @@ export const HomePage = () => {
         }}
       />
 
+      <a href="/cards/add" style={{ marginLeft: "2rem" }}>
+        +Agregar nueva tarjeta
+      </a>
+
       {!cards.filter(criteria).length ? (
         <>
           <h1>Los datos no fueron cargados todavía</h1>
