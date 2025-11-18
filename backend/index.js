@@ -29,7 +29,7 @@ app.get("/api", (req, res) => {
   res.json(resto);
 });
 
-app.use("/api/cards", require("./routes/cards").default.route);
+app.use("/api/cards", require("./routes/cards"));
 
 app.get("/api/version", (req, res) => {
   res.json(objectoRetornado.version);

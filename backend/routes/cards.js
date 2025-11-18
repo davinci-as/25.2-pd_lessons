@@ -43,6 +43,4 @@ route.get("/list", async (req, res) => {
   });
 });
 
-exports.default = {
-  route,
-};
+module.exports = route;
