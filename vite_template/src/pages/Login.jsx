@@ -32,7 +32,9 @@ export const LoginPage = () => {
           },
         })
           .then((res) => res.json())
-          .then((data) => alert(data.message));
+          .then((user) => {
+            alert("Bienvenido " + user.user.displayName);
+          });
       })
       .catch((error) => {
         if (error.code == "auth/invalid-credential") {
