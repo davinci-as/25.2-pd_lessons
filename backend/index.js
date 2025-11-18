@@ -30,6 +30,7 @@ app.get("/api", (req, res) => {
 });
 
 app.use("/api/cards", require("./routes/cards"));
+app.use("/api/users", require("./routes/users"));
 
 app.get("/api/version", (req, res) => {
   res.json(objectoRetornado.version);
