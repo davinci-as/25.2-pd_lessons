@@ -8,3 +8,10 @@
     max-width: 20rem;
     margin: auto;
 }
+
+.errorMessage {
+    background-color: red;
+    color: #fff;
+    padding: 1rem;
+    border-radius: 0.6rem;
+}
